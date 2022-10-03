@@ -204,6 +204,7 @@ class _BookPageState extends State<BookPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black12,
+      // backgroundColor: Gradient(colors: ),
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
@@ -233,6 +234,16 @@ class _BookPageState extends State<BookPage> {
         // foregroundColor: Color.fromARGB(255, 103, 225, 255),
       ),
       body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color.fromARGB(255, 24, 24, 24),
+              Color.fromARGB(146, 0, 3, 104),
+            ],
+          ),
+        ),
         padding: EdgeInsets.symmetric(
           horizontal: 30,
           vertical: 10,

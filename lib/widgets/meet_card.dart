@@ -42,6 +42,15 @@ class _MeetCardState extends State<MeetCard> {
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomCenter,
+            colors: [
+              // Colors.white,
+              Color.fromARGB(255, 251, 247, 233),
+              Color.fromARGB(255, 192, 192, 192),
+            ],
+          ),
           boxShadow: [
             BoxShadow(
               color: widget.isActive
@@ -122,10 +131,10 @@ class _MeetCardState extends State<MeetCard> {
                       //       Duration(seconds: 30).inMilliseconds,
                       // ),
                       SlideCountdown(
-                        duration: widget.isActive
+                        // duration: widget.isActive
+                        duration: true
                             ? widget.endTime.difference(DateTime.now())
                             : widget.startTime.difference(DateTime.now()),
-                        // const Duration(days: 1, hours: 2, minutes: 30),
                         decoration: BoxDecoration(
                           color: Colors.black54,
                           borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -171,7 +180,7 @@ class _MeetCardState extends State<MeetCard> {
                           borderRadius: 20,
                           elevation: 4,
                           innerColor: Colors.green,
-                          outerColor: Colors.white70,
+                          outerColor: Color.fromARGB(255, 248, 244, 208),
                           sliderButtonIcon: Icon(
                             Icons.arrow_forward_ios,
                             color: Colors.white,

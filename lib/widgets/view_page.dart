@@ -91,10 +91,9 @@ class ViewPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute<void>(
-                  builder: (BuildContext context) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) {
                     return Login();
                   },
                 ),
@@ -105,6 +104,16 @@ class ViewPage extends StatelessWidget {
         ],
       ),
       body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color.fromARGB(255, 24, 24, 24),
+              Color.fromARGB(146, 0, 3, 104),
+            ],
+          ),
+        ),
         padding: EdgeInsets.symmetric(
           horizontal: 30,
           vertical: 10,

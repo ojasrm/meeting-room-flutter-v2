@@ -51,74 +51,50 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
-  // final List<Meet> meets = [
-  //   Meet(
-  //     eventName: 'Client Meet',
-  //     organizer: 'Ojas Mahajan',
-  //     location: 'Pune',
-  //     office: 'Pune 1',
-  //     room: 'Conference room',
-  //     startTime: DateTime.now(),
-  //     endTime: DateTime.now().add(Duration(minutes: 30)),
-  //     attendees: '20',
-  //     isActive: true,
-  //     isCheckedIn: false,
-  //   ),
-  //   Meet(
-  //     eventName: 'Sync Meet',
-  //     organizer: 'Ojas Mahajan',
-  //     location: 'Mumbai',
-  //     office: 'Mumbai 1',
-  //     room: 'Conference room',
-  //     startTime: DateTime.now().add(Duration(minutes: 60)),
-  //     endTime: DateTime.now().add(Duration(minutes: 90)),
-  //     attendees: '15',
-  //     isActive: false,
-  //     isCheckedIn: false,
-  //   ),
-  //   Meet(
-  //     eventName: 'All hands Meet',
-  //     organizer: 'Ojas Mahajan',
-  //     location: 'Pune',
-  //     office: 'Pune 1',
-  //     room: 'Meeting room',
-  //     startTime: DateTime.now().add(Duration(minutes: 120)),
-  //     endTime: DateTime.now().add(Duration(minutes: 150)),
-  //     attendees: '15',
-  //     isActive: false,
-  //     isCheckedIn: false,
-  //   ),
-  //   Meet(
-  //     eventName: 'Project kickoff',
-  //     organizer: 'Ojas Mahajan',
-  //     location: 'Mumbai',
-  //     office: 'Mumbai 2',
-  //     room: 'Conference room',
-  //     startTime: DateTime.now().add(Duration(minutes: 180)),
-  //     endTime: DateTime.now().add(Duration(minutes: 210)),
-  //     attendees: '15',
-  //     isActive: false,
-  //     isCheckedIn: false,
-  //   ),
-  //   Meet(
-  //     eventName: 'Event',
-  //     organizer: 'Ojas Mahajan',
-  //     location: 'Pune',
-  //     office: 'Pune 1',
-  //     room: 'Gurukul',
-  //     startTime: DateTime.now().add(Duration(minutes: 240)),
-  //     endTime: DateTime.now().add(Duration(minutes: 270)),
-  //     attendees: '15',
-  //     isActive: false,
-  //     isCheckedIn: false,
-  //   ),
-  // ];
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final List<Widget> _pages = [ViewPage(), BookPage()];
+  int _selectedPageIndex = 0;
+  void _selectPage(int index) {
+    setState(() {
+      _selectedPageIndex = index;
+    });
+  }
+
+  // final List<Meet> meets = [
+  @override
   Widget build(BuildContext context) {
-    return ViewPage();
+    return Scaffold(
+      backgroundColor: Colors.black12,
+      body: _pages[_selectedPageIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: _selectPage,
+        backgroundColor: Colors.grey,
+        unselectedItemColor: Colors.black87,
+        selectedItemColor: Color.fromARGB(255, 185, 245, 251),
+        currentIndex: _selectedPageIndex,
+        type: BottomNavigationBarType.shifting,
+        items: [
+          BottomNavigationBarItem(
+            backgroundColor: Color.fromARGB(255, 158, 158, 158),
+            icon: Icon(Icons.meeting_room),
+            label: 'Meeting room',
+          ),
+          BottomNavigationBarItem(
+            backgroundColor: Color.fromARGB(255, 158, 158, 158),
+            icon: Icon(Icons.add_card),
+            label: 'Booking',
+          ),
+        ],
+      ),
+    );
+    // return ViewPage();
     // return BookPage();
   }
 }

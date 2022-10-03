@@ -41,7 +41,7 @@ class _MeetingListState extends State<MeetingList> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 550,
+      height: 480,
       padding: EdgeInsets.symmetric(
         // horizontal: 20,
         vertical: 10,
