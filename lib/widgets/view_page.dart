@@ -9,6 +9,7 @@ import './meeting_list.dart';
 
 class ViewPage extends StatelessWidget {
   ViewPage({Key? key}) : super(key: key);
+  static const routeName = '/view-page';
   final List<Meet> meets = [
     Meet(
       eventName: 'Client Meet',
@@ -91,13 +92,14 @@ class ViewPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) {
-                    return Login();
-                  },
-                ),
-              );
+              Navigator.of(context).pushNamed(Login.routeName);
+              // Navigator.of(context).push(
+              //   MaterialPageRoute(
+              //     builder: (_) {
+              //       return Login();
+              //     },
+              //   ),
+              // );
             },
             icon: Icon(Icons.settings),
           ),

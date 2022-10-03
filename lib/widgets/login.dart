@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
+  static const routeName = '/login';
 
   @override
   State<Login> createState() => _LoginState();
@@ -69,14 +70,16 @@ class _LoginState extends State<Login> {
                             TextButton(
                               onPressed: () => {
                                 Navigator.of(context).pop(),
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute<void>(
-                                    builder: (BuildContext context) {
-                                      return Settings();
-                                    },
-                                  ),
-                                ),
+                                Navigator.of(context)
+                                    .pushNamed(Settings.routeName),
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute<void>(
+                                //     builder: (BuildContext context) {
+                                //       return Settings();
+                                //     },
+                                //   ),
+                                // ),
                               },
                               style: TextButton.styleFrom(
                                 padding: EdgeInsets.zero,

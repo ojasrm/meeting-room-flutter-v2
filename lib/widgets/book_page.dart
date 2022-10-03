@@ -9,6 +9,7 @@ import 'package:table_calendar/table_calendar.dart';
 
 class BookPage extends StatefulWidget {
   const BookPage({Key? key}) : super(key: key);
+  static const routeName = '/bookpage';
 
   @override
   State<BookPage> createState() => _BookPageState();
@@ -219,14 +220,15 @@ class _BookPageState extends State<BookPage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute<void>(
-                  builder: (BuildContext context) {
-                    return SSO();
-                  },
-                ),
-              );
+              Navigator.of(context).pushNamed(SSO.routeName);
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute<void>(
+              //     builder: (BuildContext context) {
+              //       return SSO();
+              //     },
+              //   ),
+              // );
             },
             icon: Icon(Icons.lock_open),
           ),
