@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:slide_countdown/slide_countdown.dart';
 import 'package:slide_to_act/slide_to_act.dart';
 import 'package:flutter_countdown_timer/index.dart';
+
+import '../models/meet.dart';
+import '../providers/meetings.dart';
 
 class MeetCard extends StatefulWidget {
   MeetCard({
@@ -17,6 +21,7 @@ class MeetCard extends StatefulWidget {
     required this.attendees,
     required this.isActive,
     required this.isCheckedIn,
+    required this.isView,
   }) : super(key: key);
 
   final String eventName;
@@ -29,6 +34,7 @@ class MeetCard extends StatefulWidget {
   final String attendees;
   final bool isActive;
   bool isCheckedIn;
+  final bool isView;
 
   @override
   State<MeetCard> createState() => _MeetCardState();
@@ -37,6 +43,7 @@ class MeetCard extends StatefulWidget {
 class _MeetCardState extends State<MeetCard> {
   @override
   Widget build(BuildContext context) {
+    final meetingsData = Provider.of<Meetings>(context);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Container(
@@ -113,6 +120,22 @@ class _MeetCardState extends State<MeetCard> {
                           // fontWeight: FontWeight.w500,
                         ),
                       ),
+                      Text(
+                        widget.room,
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 67, 67, 67),
+                          fontSize: 16,
+                          // fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Text(
+                        widget.office,
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 67, 67, 67),
+                          fontSize: 16,
+                          // fontWeight: FontWeight.w500,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -167,12 +190,13 @@ class _MeetCardState extends State<MeetCard> {
                 ),
               ],
             ),
-            widget.isActive
+            widget.isView && widget.isActive
                 ? !widget.isCheckedIn
                     ? Container(
                         padding: EdgeInsets.only(top: 10),
                         child: SlideAction(
                           onSubmit: () {
+                            meetingsData.checkIn(2);
                             setState(() {
                               widget.isCheckedIn = true;
                             });

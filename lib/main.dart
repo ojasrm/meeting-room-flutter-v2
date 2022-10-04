@@ -1,5 +1,7 @@
-import 'package:booking_room_v2/widgets/settings.dart';
+import './providers/meetings.dart';
+import './widgets/settings.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import './widgets/book_page.dart';
 import './widgets/sso.dart';
@@ -44,7 +46,10 @@ class MyApp extends StatelessWidget {
         //   ),
         // ),
       ),
-      home: HomePage(),
+      home: ChangeNotifierProvider(
+        create: (BuildContext ctx) => Meetings(),
+        child: HomePage(),
+      ),
       routes: {
         ViewPage.routeName: (ctx) => ViewPage(),
         BookPage.routeName: (ctx) => BookPage(),
