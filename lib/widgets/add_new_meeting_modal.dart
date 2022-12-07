@@ -1,6 +1,10 @@
+import '../models/meet.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/meetings.dart';
 
 class AddNewMeetingModal extends StatefulWidget {
   const AddNewMeetingModal({Key? key, required this.addNewMeet})
@@ -22,32 +26,9 @@ class _AddNewMeetingModalState extends State<AddNewMeetingModal> {
   DateTime _startTime = DateTime.now();
   DateTime _endTime = DateTime.now();
 
-  // void _submitData() {
-  //   final eventName = eventNameController.text;
-  //   final attendees = attendeesController.text;
-
-  //   if (eventName.isEmpty || attendees.isEmpty) {
-  //     return;
-  //   }
-  //   Navigator.of(context).pop();
-  //   widget.addNewMeet(
-  //     eventName: eventName,
-  //     organiser: 'ojas.mahajan@searce.com',
-  //     location: location,
-  //     office: office,
-  //     room: room,
-  //     startTime: _startTime,
-  //     endTime: _endTime,
-  //     // attendees: attendees,
-  //   );
-  // }
   int defaultLocation = 0;
   int defaultOffice = 0;
   int defaultRoom = 0;
-
-  // String location = 'Pune';
-  // String office = 'Searce | Pune 1';
-  // String room = 'Conference Room A';
 
   var locations = [
     'Pune',
@@ -191,21 +172,6 @@ class _AddNewMeetingModalState extends State<AddNewMeetingModal> {
                 Navigator.of(context).pop();
               },
             ),
-            // Column(
-            //   children: [
-            //     Image.asset(
-            //       'assets/images/check.png',
-            //       scale: 2,
-            //     ),
-            //     IconButton(
-            //       onPressed: () {
-            //         Navigator.of(context).pop();
-            //         Navigator.of(context).pop();
-            //       },
-            //       icon: Icon(Icons.done),
-            //     ),
-            //   ],
-            // ),
           ),
           behavior: HitTestBehavior.opaque,
         );
@@ -215,6 +181,8 @@ class _AddNewMeetingModalState extends State<AddNewMeetingModal> {
 
   @override
   Widget build(BuildContext context) {
+    final meetingsData = Provider.of<Meetings>(context);
+    // Function addMeeting = meetingsData.addMeeting;
     return Container(
       padding: EdgeInsets.all(20),
       child: SingleChildScrollView(
@@ -423,113 +391,39 @@ class _AddNewMeetingModalState extends State<AddNewMeetingModal> {
                       );
                     }),
                   ),
-                  // Text(
-                  //   'Location',
-                  //   style: TextStyle(
-                  //     fontSize: 15,
-                  //     fontWeight: FontWeight.w700,
-                  //   ),
-                  // ),
-                  // DropdownButton(
-                  //   value: location,
-                  //   icon: const Icon(Icons.keyboard_arrow_down),
-                  //   // dropdownColor: Color.fromARGB(255, 176, 246, 255),
-                  //   items: locations.map((String items) {
-                  //     return DropdownMenuItem(
-                  //       value: items,
-                  //       child: Text(items),
-                  //     );
-                  //   }).toList(),
-                  //   onChanged: (String? newValue) {
-                  //     setState(() {
-                  //       location = newValue!;
-                  //     });
-                  //   },
-                  // ),
-                  // SizedBox(
-                  //   height: 20,
-                  // ),
-                  // Text(
-                  //   'Office',
-                  //   style: TextStyle(
-                  //     fontSize: 15,
-                  //     fontWeight: FontWeight.w700,
-                  //   ),
-                  // ),
-                  // DropdownButton(
-                  //   value: office,
-                  //   icon: const Icon(Icons.keyboard_arrow_down),
-                  //   items: offices.map((String items) {
-                  //     return DropdownMenuItem(
-                  //       value: items,
-                  //       child: Text(items),
-                  //     );
-                  //   }).toList(),
-                  //   onChanged: (String? newValue) {
-                  //     setState(() {
-                  //       office = newValue!;
-                  //     });
-                  //   },
-                  // ),
-                  // SizedBox(
-                  //   height: 20,
-                  // ),
-                  // Text(
-                  //   'Room',
-                  //   style: TextStyle(
-                  //     fontSize: 15,
-                  //     fontWeight: FontWeight.w700,
-                  //   ),
-                  // ),
-                  // DropdownButton(
-                  //   value: room,
-                  //   icon: const Icon(Icons.keyboard_arrow_down),
-                  //   items: rooms.map((String items) {
-                  //     return DropdownMenuItem(
-                  //       value: items,
-                  //       child: Text(items),
-                  //     );
-                  //   }).toList(),
-                  //   onChanged: (String? newValue) {
-                  //     setState(() {
-                  //       room = newValue!;
-                  //     });
-                  //   },
-                  // ),
-                  // TextField(
-                  //   decoration: InputDecoration(labelText: 'Location'),
-                  //   controller: locationController,
-                  //   onSubmitted: (_) => _submitData(),
-                  // ),
-                  // TextField(
-                  //   decoration: InputDecoration(labelText: 'Office'),
-                  //   controller: officeController,
-                  //   onSubmitted: (_) => _submitData(),
-                  // ),
-                  // TextField(
-                  //   decoration: InputDecoration(labelText: 'Room'),
-                  //   controller: roomController,
-                  //   onSubmitted: (_) => _submitData(),
-                  // ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       TextButton.icon(
                         onPressed: () => {
                           Navigator.of(context).pop(),
-                          // meetingCreated(context),
-                          widget.addNewMeet(
-                            eventName: eventNameController.text,
-                            organizer: 'Ojas Mahajan',
-                            location: locations[defaultLocation],
-                            office: offices[defaultOffice],
-                            room: rooms[defaultRoom],
-                            startTime: _startTime,
-                            endTime: _endTime,
-                            attendees: attendeesController.text,
-                            isActive: false,
-                            isCheckedIn: false,
-                          ),
+                          meetingsData.working(),
+                          // meetingsData.addMeeting(
+                          //   Meet(
+                          //     eventName: eventNameController.text,
+                          //     organizer: 'Ojas Mahajan',
+                          //     location: locations[defaultLocation],
+                          //     office: offices[defaultOffice],
+                          //     room: rooms[defaultRoom],
+                          //     startTime: _startTime,
+                          //     endTime: _endTime,
+                          //     attendees: attendeesController.text,
+                          //     isActive: false,
+                          //     isCheckedIn: false,
+                          //   ),
+                          // ),
+                          // widget.addNewMeet(
+                          //   eventName: eventNameController.text,
+                          //   organizer: 'Ojas Mahajan',
+                          //   location: locations[defaultLocation],
+                          //   office: offices[defaultOffice],
+                          //   room: rooms[defaultRoom],
+                          //   startTime: _startTime,
+                          //   endTime: _endTime,
+                          //   attendees: attendeesController.text,
+                          //   isActive: false,
+                          //   isCheckedIn: false,
+                          // ),
                         },
                         icon: Icon(
                           Icons.add,
@@ -550,25 +444,6 @@ class _AddNewMeetingModalState extends State<AddNewMeetingModal> {
                           alignment: Alignment.bottomCenter,
                         ),
                       ),
-                      // ElevatedButton(
-                      //   onPressed: () => {
-                      //     Navigator.of(context).pop(),
-                      //     // meetingCreated(context),
-                      //     widget.addNewMeet(
-                      //       eventName: eventNameController.text,
-                      //       organizer: 'Ojas Mahajan',
-                      //       location: locations[defaultLocation],
-                      //       office: offices[defaultOffice],
-                      //       room: rooms[defaultRoom],
-                      //       startTime: _startTime,
-                      //       endTime: _endTime,
-                      //       attendees: attendeesController.text,
-                      //       isActive: false,
-                      //       isCheckedIn: false,
-                      //     ),
-                      //   },
-                      //   child: Text('Create event'),
-                      // ),
                     ],
                   )
                 ],

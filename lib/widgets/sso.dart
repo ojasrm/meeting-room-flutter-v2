@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class SSO extends StatefulWidget {
   const SSO({Key? key}) : super(key: key);
+  static const routeName = '/sso';
 
   @override
   State<SSO> createState() => _LoginState();

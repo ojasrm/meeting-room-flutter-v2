@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Meet {
+  final int id;
   final String eventName;
   final String organizer;
   final String location;
@@ -9,10 +10,12 @@ class Meet {
   final DateTime startTime;
   final DateTime endTime;
   final String attendees;
-  final bool isActive;
-  final bool isCheckedIn;
+  bool isActive;
+  bool isCheckedIn;
+  // final bool isView;
 
   Meet({
+    required this.id,
     required this.eventName,
     required this.organizer,
     required this.location,
@@ -23,5 +26,18 @@ class Meet {
     required this.attendees,
     required this.isActive,
     required this.isCheckedIn,
+    // required this.isView,
   });
+
+  // void checkIn() {
+  //   isCheckedIn = true;
+  //   notifyListeners();
+  // }
+
+  // void active() {
+  //   // if (startTime.isBefore(DateTime.now())) {
+  //   isActive = true;
+  //   // }
+  //   notifyListeners();
+  // }
 }
