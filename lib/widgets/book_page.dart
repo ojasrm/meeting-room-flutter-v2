@@ -1,4 +1,4 @@
-import 'package:booking_room_v2/widgets/sso.dart';
+import './sso.dart';
 import 'package:intl/intl.dart';
 
 import '../models/meet.dart';

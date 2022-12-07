@@ -1,4 +1,4 @@
-import 'package:booking_room_v2/widgets/meeting_list.dart';
+import './widgets/meeting_list.dart';
 
 import './models/meet.dart';
 import 'package:slide_to_act/slide_to_act.dart';
